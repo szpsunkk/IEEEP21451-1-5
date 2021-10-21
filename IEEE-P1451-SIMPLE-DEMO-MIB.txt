@@ -1,0 +1,225 @@
+IEEE-P1451-SIMPLE-DEMO-MIB DEFINITIONS ::= BEGIN
+ 
+IMPORTS
+	enterprises		FROM RFC1155-SMI
+	Integer32, OBJECT-TYPE	FROM SNMPv2-SMI
+	DisplayString		FROM SNMPv2-TC;
+
+sjtu			OBJECT IDENTIFIER ::= { enterprises 7934 }
+
+ieeeP1451Project	OBJECT IDENTIFIER ::= { sjtu 1451 }
+
+ieeeP1451Sensor		OBJECT IDENTIFIER ::= { ieeeP1451Project 1 }
+
+ieeeP1451Actuator	OBJECT IDENTIFIER ::= { ieeeP1451Project 2 }
+
+
+--
+-- sensors
+--
+
+SeTemperature	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	
+		"The output value of a Temperature sensor (the unit is degree Celsius)."
+	::= { ieeeP1451Sensor 1 }
+
+SeLight	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Light sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 2 }
+
+SeHumidity	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Humidity sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 3 }
+
+SeDistence	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Distence sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 4 }
+
+SeAccelerationx	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Acceleration_x sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 5 }
+
+SeAccelerationy	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Acceleration_y sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 6 }
+
+SeAccelerationz	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Acceleration_z sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 7 }
+
+SeHS         	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Hall sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 8 }
+
+SeLoadVoltage 	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of Load_Voltage (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 9 }
+
+SeLoadCurrent  	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of Load_Current (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 10 }
+
+SeLoadPower  	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of Load_Power (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 11 }
+
+SePressure  	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Pressure sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 12 }
+
+SeFree1  		OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of Free1 (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 13 }
+
+SeFree2		  	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of Free2 (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 14 }
+--
+-- actuators
+--
+
+AcLamp		OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The on/off state of a lamp."
+	::= { ieeeP1451Actuator 1 }
+
+AcHunidifier	OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The on/off state of an Hunidifier."
+	::= { ieeeP1451Actuator 2 }
+
+Acbuzzer		OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The on/off state of a buzzer."
+	::= { ieeeP1451Actuator 3 }
+
+
+AcLEDScreen	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The display content of an LED Screen."
+	::= { ieeeP1451Actuator 4 }
+
+AcFree1		OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The display content of Free1."
+	::= { ieeeP1451Actuator 5 }
+
+AcFree2		OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The display content of Free1."
+	::= { ieeeP1451Actuator 6 }
+
+
+
+
+
+
+--
+--Table
+--
+
+
+  ieeeP1451TimTable  	 OBJECT-TYPE
+	SYNTAX			SEQUENCE OF ieeeP1451TimEntry
+	MAX-ACCESS 		read-create
+	STATUS			current
+	DESCRIPTION
+		"The table of TIM information"
+	::= {ieeeP1451Project 3}
+
+
+  ieeeP1451TimEntry	OBJECT-TYPE
+	SYNTAX			IeeeP1451Entry
+	MAX-ACCESS 		read-create
+	STATUS			current
+	DESCRIPTION
+		"The table of TIM information"
+	INDEX { timID, channelID}
+	::= {ieeeP1451TimTable 1}
+
+
+
+	IeeeP1451Entry ::=
+		SEQUENCE {
+			timID 			Integer32,
+			channelID		Integer32,
+			commuType		OCTET STRING,
+			commuAddress	OCTET STRING,
+			testValue		OCTET STRING,
+			p1451RowStatus	RowStatus
+				}
+
+END

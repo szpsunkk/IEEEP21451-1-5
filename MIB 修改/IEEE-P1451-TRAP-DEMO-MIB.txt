@@ -1,0 +1,20 @@
+IEEE-P1451-TRAP-DEMO-MIB DEFINITIONS ::= BEGIN
+ 
+IMPORTS
+	enterprisess2		FROM RFC1155-SMI
+	Integer32, OBJECT-TYPE	FROM SNMPv2-SMI
+	DisplayString		FROM SNMPv2-TC;
+
+sjtus2					OBJECT IDENTIFIER ::= { enterprisess2 7935 }
+
+ieeeP1451Project2		OBJECT IDENTIFIER ::= { sjtus2 1451 }
+
+TestTraps 				OBJECT IDENTIFIER ::= { ieeeP1451Project2 1 }
+
+cpuRatioHigh NOTIFICATION-TYPE
+      OBJECTS  {SystemTrapDescription}
+      STATUS  current
+      DESCRIPTION
+          "."
+    ::= { TestTraps 1 }    
+end

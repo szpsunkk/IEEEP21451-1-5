@@ -1,0 +1,29 @@
+TEST-TRAP-MIB DEFINITIONS ::= BEGIN
+   
+   IMPORTS
+       MODULE-IDENTITY, OBJECT-TYPE, TimeTicks FROM SNMPv2-SMI
+          DisplayString, FROM SNMPv2-TC
+       enterprises
+           FROM RFC1155-SMI;
+       test OBJECT IDENTIFIER ::= { enterprises 1000 }
+       TestTraps OBJECT IDENTIFIER ::= { test 1 }
+       
+  
+      cpuRatioHigh NOTIFICATION-TYPE
+             OBJECTS  {SystemTrapDescription}
+             STATUS  current
+             DESCRIPTION
+                 "."
+         ::= { TestTraps 1 }    
+         
+  
+      TestDescription OBJECT IDENTIFIER ::= { TestTraps 2 }
+      
+      TestTrapDescription  OBJECT-TYPE
+          SYNTAX  DisplayString (SIZE (0..256))
+          MAX-ACCESS read-only
+          STATUS current
+          DESCRIPTION "  "
+          ::= { TestDescription 1 }
+           
+  END

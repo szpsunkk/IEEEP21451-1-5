@@ -1,0 +1,119 @@
+IEEE-P1451-SIMPLE-DEMO-MIB DEFINITIONS ::= BEGIN
+ 
+IMPORTS
+	enterprises		FROM RFC1155-SMI
+	Integer32, OBJECT-TYPE	FROM SNMPv2-SMI
+	DisplayString		FROM SNMPv2-TC;
+
+sjtu			OBJECT IDENTIFIER ::= { enterprises 7934 }
+
+ieeeP1451Project	OBJECT IDENTIFIER ::= { sjtu 1451 }
+
+ieeeP1451Sensor		OBJECT IDENTIFIER ::= { ieeeP1451Project 1 }
+
+ieeeP1451Actuator	OBJECT IDENTIFIER ::= { ieeeP1451Project 2 }
+
+--
+-- sensors
+--
+
+seTemperature	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	
+		"The output value of a temperature sensor (the unit is degree Celsius)."
+	::= { ieeeP1451Sensor 1 }
+
+seHumidity	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Humidity sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 2 }
+
+seDistence	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Distence sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 3 }
+
+seAcceleration	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Acceleration sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 4 }
+
+seHS         	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Hall sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 5 }
+
+seSmoker 	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Smoker sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 6 }
+
+seGravity  	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Gravity sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 7 }
+
+sePressure  	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION
+		"The output value of a Pressure sensor (the unit is kilo-Pascal)."
+	::= { ieeeP1451Sensor 8 }
+--
+-- actuators
+--
+
+acLamp		OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The on/off state of a lamp."
+	::= { ieeeP1451Actuator 1 }
+
+acHunidifier	OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The on/off state of an Hunidifier."
+	::= { ieeeP1451Actuator 2 }
+
+acbuzzer		OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The on/off state of a buzzer."
+	::= { ieeeP1451Actuator 3 }
+
+
+acLEDScreen	OBJECT-TYPE
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION
+		"The display content of an LED Screen."
+	::= { ieeeP1451Actuator 4 }
+END
